@@ -1,4 +1,4 @@
-module changeme
+module github.com/Owbird/KNUST-AIM-Desktop
 
 go 1.21
 
