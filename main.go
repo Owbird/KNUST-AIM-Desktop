@@ -17,9 +17,11 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:  "knust-aim-desktop",
+		Title:  "AIM",
 		Width:  1024,
 		Height: 768,
+		MinHeight: 768,
+		MinWidth: 1024,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
