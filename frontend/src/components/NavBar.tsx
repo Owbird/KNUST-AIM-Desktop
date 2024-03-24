@@ -9,7 +9,7 @@ import {
 import NavLink from "./NavLink";
 import { FaSignInAlt } from "react-icons/fa";
 import { ReactNode } from "react";
-import { AIMLogo } from "@/data/constants";
+import AIMLogo from "@/assets/images/aim.png";
 
 const links = ["News", "Results", "Profile"];
 

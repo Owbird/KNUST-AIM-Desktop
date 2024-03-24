@@ -5,6 +5,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import Home from "./pages/Home";
 import AppLayout from "./layouts/App";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
     {
@@ -25,7 +28,9 @@ const root = createRoot(container!);
 root.render(
     <React.StrictMode>
         <ChakraProvider>
-            <RouterProvider router={router} />
+            <QueryClientProvider client={queryClient}>
+                <RouterProvider router={router} />
+            </QueryClientProvider>
         </ChakraProvider>
     </React.StrictMode>,
 );
