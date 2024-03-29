@@ -1,7 +1,7 @@
 import { NewsResponse } from "@/types/news";
 import { useQuery } from "react-query";
 
-const useNewsFunctions = () => {
+const useGetNews = () => {
 	const { isLoading, error, data } = useQuery(
 		"news",
 		() =>
@@ -16,4 +16,4 @@ const useNewsFunctions = () => {
 	return { isLoading, error, data };
 };
 
-export default useNewsFunctions;
+export default useGetNews;
