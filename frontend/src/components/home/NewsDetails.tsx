@@ -66,12 +66,11 @@ const NewsDetails = ({ news, onClose }: NewsDetailsProps) => {
 				<Stack>
 					<Text
 						color={"green.500"}
-						textTransform={"uppercase"}
 						fontWeight={800}
 						fontSize={"sm"}
 						letterSpacing={1.1}
 					>
-						{news.date}
+						{news.date} . {data?.news.read_time}min read
 					</Text>
 					{data?.news.content.map(renderNewsContent)}
 				</Stack>

@@ -21,6 +21,7 @@ export interface NewsDetails {
   featured_image: string;
   source: string;
   tile: string;
+  read_time: number;
 }
 
 export interface NewsDetailsResponse {
