@@ -2,10 +2,10 @@ import { type NewsItem } from "@/types/news";
 import {
   Box,
   Heading,
-  Text,
   Image,
+  Text,
   useColorModeValue,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
 import { Fragment } from "react";
 import NewsDetails from "./NewsDetails";

@@ -1,15 +1,15 @@
-import {
-  Box,
-  Flex,
-  Avatar,
-  HStack,
-  Button,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import NavLink from "./NavLink";
-import { FaSignInAlt } from "react-icons/fa";
-import { ReactNode } from "react";
 import AIMLogo from "@/assets/images/aim.png";
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  HStack,
+  useColorModeValue
+} from "@chakra-ui/react";
+import { ReactNode } from "react";
+import { FaSignInAlt } from "react-icons/fa";
+import NavLink from "./NavLink";
 
 const links = ["News", "Results", "Profile"];
 
