@@ -15,9 +15,9 @@
     "@emotion/styled": "^11.11.0",
     "autoprefixer": "^10.4.18",
     "framer-motion": "^11.0.20",
+    "notistack": "^3.0.1",
     "path": "^0.12.7",
     "postcss-cli": "^11.0.0",
-    "prettier-plugin-organize-imports": "^3.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
@@ -30,6 +30,7 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.1",
+    "prettier-plugin-organize-imports": "^3.2.4",
     "tailwindcss": "^3.4.1",
     "typescript": "^4.6.4",
     "vite": "^3.0.7"
