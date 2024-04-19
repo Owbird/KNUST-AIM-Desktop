@@ -1,14 +1,20 @@
 import { userAtom } from "@/states/user";
 import { SignInFormData } from "@/types/forms";
-import { UserAuthResponse, UserDataResponse } from "@/types/user";
+import { UserAuthResponse, UserData, UserDataResponse } from "@/types/user";
 import { useAtom } from "jotai";
 import { enqueueSnackbar } from "notistack";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 
 const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useAtom(userAtom);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user_data")!) as UserData;
+
+    setUser(user);
+  }, []);
 
   const signIn = useMutation({
     onError: (data: any) => {
@@ -41,6 +47,9 @@ const useAuth = () => {
       enqueueSnackbar(`Welcome, ${userData.user_data.personal.surname}`, {
         variant: "success"
       });
+
+      localStorage.setItem("token", data.token!);
+      localStorage.setItem("user_data", JSON.stringify(userData.user_data));
     },
 
     mutationFn: (formData: SignInFormData) => {
@@ -61,7 +70,7 @@ const useAuth = () => {
     }
   });
 
-  return { signIn, isLoading , user};
+  return { signIn, isLoading, user };
 };
 
 export default useAuth;
