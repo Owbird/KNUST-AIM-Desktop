@@ -22,7 +22,10 @@ import { FaSignInAlt } from "react-icons/fa";
 import Loading from "./Loading";
 import NavLink from "./NavLink";
 
-const links = ["News", "Results", "Profile"];
+const links = [
+  { label: "Results", href: "/results" },
+  { label: "Profile", href: "/profile" }
+];
 
 interface NavBarProps {
   children: ReactNode;
@@ -55,8 +58,8 @@ const NavBar = ({ children }: NavBarProps) => {
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
-              {links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+              {links.map(({ label, href }) => (
+                <NavLink href={href} label={label} key={href} />
               ))}
             </HStack>
           </HStack>

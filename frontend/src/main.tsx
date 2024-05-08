@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./layouts/App";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 import "./style.css";
 
 const queryClient = new QueryClient();
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />
+      },
+      {
+        path: "/profile",
+        element: <Profile />
       }
     ]
   }
