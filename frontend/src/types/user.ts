@@ -36,3 +36,11 @@ export interface UserData {
     studentId: string;
   };
 }
+
+export interface ResultsSelectionResponse {
+  message: string;
+  results: {
+    sems: string[];
+    years: string[];
+  };
+}

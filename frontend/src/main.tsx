@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./layouts/App";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import ResultsPage from "./pages/ResultsPage";
 import "./style.css";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />
+      },
+      {
+        path: "/results",
+        element: <ResultsPage />
       }
     ]
   }
