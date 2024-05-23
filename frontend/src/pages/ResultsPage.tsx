@@ -22,7 +22,7 @@ const ResultsPage = () => {
 
   if (isLoading) return <Loading />;
 
-  if (error) return  "Error"
+  if (error) return  <h1>Couldn't load</h1>
 
   return (
     <Box>
