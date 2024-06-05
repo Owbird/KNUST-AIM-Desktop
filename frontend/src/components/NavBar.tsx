@@ -23,6 +23,7 @@ import Loading from "./Loading";
 import NavLink from "./NavLink";
 
 const links = [
+  { label: "News", href: "/" },
   { label: "Results", href: "/results" },
   { label: "Profile", href: "/profile" }
 ];
@@ -58,7 +59,7 @@ const NavBar = ({ children }: NavBarProps) => {
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
-              {links.map(({ label, href }) => (
+              {user && links.map(({ label, href }) => (
                 <NavLink href={href} label={label} key={href} />
               ))}
             </HStack>
