@@ -24,8 +24,8 @@ import NavLink from "./NavLink";
 
 const links = [
   { label: "News", href: "/" },
-  { label: "Results", href: "/results" },
-  { label: "Profile", href: "/profile" }
+  { label: "Results", href: "#results" },
+  { label: "Profile", href: "#profile" }
 ];
 
 interface NavBarProps {
