@@ -10,6 +10,7 @@ import {
   FormControl,
   FormLabel,
   HStack,
+  Image,
   Input,
   Menu,
   MenuButton,
@@ -72,95 +73,102 @@ const NavBar = ({ children }: NavBarProps) => {
             </HStack>
           </HStack>
 
-          {user && (
-            <Avatar
-              src={`http://localhost:8080/api/v1/user/image/${user.programme.studentId}`}
+          <Flex gap={2}>
+            <Image
+              src="http://localhost:8080/api/v1/knust-server-status/badge"
+              alt="KNUST Server status"
             />
-          )}
 
-          {!user && (
-            <Flex alignItems={"center"}>
-              <Menu>
-                <MenuButton
-                  variant={"solid"}
-                  colorScheme={"teal"}
-                  size={"sm"}
-                  mr={4}
-                  leftIcon={<FaSignInAlt />}
-                  as={Button}
-                  rightIcon={<ChevronDownIcon />}
-                >
-                  Sign In
-                </MenuButton>
-                <MenuList>
-                  <Flex>
-                    <Stack>
-                      <Box rounded={"lg"} p={12}>
-                        {isLoading ? (
-                          <Loading />
-                        ) : (
-                          <Stack spacing={4}>
-                            <FormControl id="studentID">
-                              <FormLabel>Student ID</FormLabel>
-                              <Input
-                                onChange={(event) =>
-                                  handleFormInput(
-                                    "studentId",
-                                    event.target.value
-                                  )
-                                }
-                                type="number"
-                                placeholder="20665584"
-                              />
-                            </FormControl>
-                            <FormControl id="username">
-                              <FormLabel>Username</FormLabel>
-                              <Input
-                                onChange={(event) =>
-                                  handleFormInput(
-                                    "username",
-                                    event.target.value
-                                  )
-                                }
-                                placeholder="username"
-                              />
-                            </FormControl>
-                            <FormControl id="password">
-                              <FormLabel>Password</FormLabel>
-                              <Input
-                                onChange={(event) =>
-                                  handleFormInput(
-                                    "password",
-                                    event.target.value
-                                  )
-                                }
-                                type="password"
-                                placeholder="*******"
-                              />
-                            </FormControl>
-                            <Stack spacing={10}>
-                              <Button
-                                bg={"blue.400"}
-                                color={"white"}
-                                _hover={{
-                                  bg: "blue.500"
-                                }}
-                                onClick={async () => {
-                                  await signIn.mutateAsync(formData);
-                                }}
-                              >
-                                Sign in
-                              </Button>
+            {user && (
+              <Avatar
+                src={`http://localhost:8080/api/v1/user/image/${user.programme.studentId}`}
+              />
+            )}
+
+            {!user && (
+              <Flex alignItems={"center"}>
+                <Menu>
+                  <MenuButton
+                    variant={"solid"}
+                    colorScheme={"teal"}
+                    size={"sm"}
+                    mr={4}
+                    leftIcon={<FaSignInAlt />}
+                    as={Button}
+                    rightIcon={<ChevronDownIcon />}
+                  >
+                    Sign In
+                  </MenuButton>
+                  <MenuList>
+                    <Flex>
+                      <Stack>
+                        <Box rounded={"lg"} p={12}>
+                          {isLoading ? (
+                            <Loading />
+                          ) : (
+                            <Stack spacing={4}>
+                              <FormControl id="studentID">
+                                <FormLabel>Student ID</FormLabel>
+                                <Input
+                                  onChange={(event) =>
+                                    handleFormInput(
+                                      "studentId",
+                                      event.target.value
+                                    )
+                                  }
+                                  type="number"
+                                  placeholder="20665584"
+                                />
+                              </FormControl>
+                              <FormControl id="username">
+                                <FormLabel>Username</FormLabel>
+                                <Input
+                                  onChange={(event) =>
+                                    handleFormInput(
+                                      "username",
+                                      event.target.value
+                                    )
+                                  }
+                                  placeholder="username"
+                                />
+                              </FormControl>
+                              <FormControl id="password">
+                                <FormLabel>Password</FormLabel>
+                                <Input
+                                  onChange={(event) =>
+                                    handleFormInput(
+                                      "password",
+                                      event.target.value
+                                    )
+                                  }
+                                  type="password"
+                                  placeholder="*******"
+                                />
+                              </FormControl>
+                              <Stack spacing={10}>
+                                <Button
+                                  bg={"blue.400"}
+                                  color={"white"}
+                                  _hover={{
+                                    bg: "blue.500"
+                                  }}
+                                  onClick={async () => {
+                                    await signIn.mutateAsync(formData);
+                                  }}
+                                >
+                                  Sign in
+                                </Button>
+                              </Stack>
                             </Stack>
-                          </Stack>
-                        )}
-                      </Box>
-                    </Stack>
-                  </Flex>
-                </MenuList>
-              </Menu>
-            </Flex>
-          )}
+                          )}
+                        </Box>
+                      </Stack>
+                    </Flex>
+                  </MenuList>
+                </Menu>
+              </Flex>
+            )}
+          </Flex>
         </Flex>
       </Box>
 
