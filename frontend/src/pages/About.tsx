@@ -1,6 +1,7 @@
 import { Box, Heading, HStack, Text } from "@chakra-ui/react";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { FaCircle } from "react-icons/fa";
+import { GetVersion } from "../../wailsjs/go/main/App";
 import { BrowserOpenURL } from "../../wailsjs/runtime/runtime";
 
 const Link = ({ label, href }: { label: string; href: string }) => {
@@ -16,6 +17,17 @@ const Link = ({ label, href }: { label: string; href: string }) => {
 };
 
 const About = () => {
+  const [version, setVersion] = useState("");
+
+  useEffect(() => {
+    const getVersion = async () => {
+      const version = await GetVersion();
+      setVersion(version);
+    };
+
+    getVersion()
+  }, []);
+
   const links = [
     {
       label: "View releases",
@@ -39,13 +51,13 @@ const About = () => {
       borderRadius="md"
       shadow="md"
     >
-      <Heading as="h1" size="xl" mb="4" color="teal.500">
+      <Heading as="h1" size="xl" color="teal.500">
         KNUST AIM Desktop
       </Heading>
 
-      <Text color={"gray.500"}>Version 1.0.0</Text>
+      <Text color={"gray.500"}>{version}</Text>
 
-      <Text fontSize="lg" textAlign="center" mb="2">
+      <Text fontSize="lg" textAlign="center" mb="2" mt={"4"}>
         KNUST AIM Desktop is an{" "}
         <Link
           href="https://github.com/Owbird/KNUST-AIM-Desktop"

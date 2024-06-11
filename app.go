@@ -9,6 +9,8 @@ type App struct {
 	ctx context.Context
 }
 
+var Version string
+
 // NewApp creates a new App application struct
 func NewApp() *App {
 	return &App{}
@@ -19,3 +21,5 @@ func NewApp() *App {
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
+
+func (a *App) GetVersion() string { return Version }
