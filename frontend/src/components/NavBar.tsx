@@ -24,12 +24,14 @@ import Loading from "./Loading";
 import NavLink from "./NavLink";
 
 const authedLinks = [
-  { label: "News", href: "/" },
   { label: "Results", href: "#results" },
   { label: "Profile", href: "#profile" }
 ];
 
-const generalLinks = [{ label: "About", href: "#about" }];
+const generalLinks = [
+  { label: "News", href: "/" },
+  { label: "About", href: "#about" }
+];
 
 interface NavBarProps {
   children: ReactNode;
@@ -62,14 +64,14 @@ const NavBar = ({ children }: NavBarProps) => {
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
+              {generalLinks.map(({ label, href }) => (
+                <NavLink href={href} label={label} key={href} />
+              ))}
+
               {user &&
                 authedLinks.map(({ label, href }) => (
                   <NavLink href={href} label={label} key={href} />
                 ))}
-
-              {generalLinks.map(({ label, href }) => (
-                <NavLink href={href} label={label} key={href} />
-              ))}
             </HStack>
           </HStack>
 
