@@ -54,6 +54,9 @@ const useAuth = () => {
 
     mutationFn: (formData: SignInFormData) => {
       setIsLoading(true);
+
+      localStorage.setItem("form_data", JSON.stringify(formData));
+
       return new Promise<UserAuthResponse>((resolve, reject) => {
         try {
           fetch("http://localhost:8080/api/v1/auth/login", {

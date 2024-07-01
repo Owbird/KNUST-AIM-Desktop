@@ -18,7 +18,7 @@ import {
   Stack,
   useColorModeValue
 } from "@chakra-ui/react";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { FaSignInAlt } from "react-icons/fa";
 import Loading from "./Loading";
 import NavLink from "./NavLink";
@@ -52,6 +52,16 @@ const NavBar = ({ children }: NavBarProps) => {
       [key]: value
     }));
   };
+
+  useEffect(() => {
+    const formData = localStorage.getItem("form_data");
+
+    if (formData) {
+      const data = JSON.parse(formData) as SignInFormData;
+
+      signIn.mutate(data);
+    }
+  }, []);
 
   return (
     <Box>
