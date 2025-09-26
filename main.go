@@ -35,6 +35,11 @@ func main() {
 		OnStartup: app.startup,
 		Bind: []interface{}{
 			app,
+			app.UserFunctions,
+			app.ResultFunctions,
+			app.AuthFunctions,
+			app.NewsFunctions,
+			app.StatusFunctions,
 		},
 	})
 	if err != nil {
