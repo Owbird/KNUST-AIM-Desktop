@@ -1,0 +1,3 @@
+[submodule "KNUST-AIM-API"]
+	path = KNUST-AIM-API
+	url = https://github.com/Owbird/KNUST-AIM-API
