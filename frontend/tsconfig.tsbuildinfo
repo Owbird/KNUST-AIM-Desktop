@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./wailsjs/go/models.ts","./wailsjs/go/auth/AuthFunctions.d.ts","./wailsjs/go/main/App.d.ts","./wailsjs/go/news/NewsFunctions.d.ts","./wailsjs/go/results/ResultsFunctions.d.ts","./wailsjs/go/status/StatusFunctions.d.ts","./wailsjs/go/user/UserFunctions.d.ts","./wailsjs/runtime/runtime.d.ts"],"errors":true,"version":"5.9.3"}
