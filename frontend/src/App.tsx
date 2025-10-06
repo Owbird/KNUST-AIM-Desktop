@@ -10,6 +10,7 @@ import { NewsPage } from "@src/pages/NewsPage";
 import { ProfilePage } from "@src/pages/ProfilePage";
 import { ResultsSelectionPage } from "@src/pages/ResultsSelectionPage";
 import { Fragment, useEffect, useState } from "react";
+import { AboutPage } from "./pages/AboutPage";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -26,6 +27,7 @@ function App() {
           <Route index element={<Navigate to="/news" />} />
           <Route path="news" element={<NewsPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/about" element={<AboutPage />} />
           {isAuthenticated && (
             <Fragment>
               <Route path="profile" element={<ProfilePage />} />

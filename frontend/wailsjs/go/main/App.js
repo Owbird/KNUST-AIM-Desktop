@@ -5,3 +5,7 @@
 export function GetVersion() {
   return window['go']['main']['App']['GetVersion']();
 }
+
+export function ViewLink(arg1) {
+  return window['go']['main']['App']['ViewLink'](arg1);
+}

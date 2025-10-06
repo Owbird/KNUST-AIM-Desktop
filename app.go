@@ -8,6 +8,7 @@ import (
 	"github.com/Owbird/KNUST-AIM-API/pkg/results"
 	"github.com/Owbird/KNUST-AIM-API/pkg/status"
 	"github.com/Owbird/KNUST-AIM-API/pkg/user"
+	"github.com/jasonlovesdoggo/gopen"
 )
 
 // App struct
@@ -40,3 +41,8 @@ func (a *App) startup(ctx context.Context) {
 }
 
 func (a *App) GetVersion() string { return Version }
+
+func (a *App) ViewLink(link string) {
+
+	gopen.Open(link)
+}

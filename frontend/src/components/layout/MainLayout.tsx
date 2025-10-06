@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@src/components/ui/button";
-import { Home, LogOut, Newspaper, User, BarChart2 } from "lucide-react";
+import { Home, LogOut, Newspaper, User, BarChart2, Info } from "lucide-react";
 import { GetStatusBadge } from "@go/status/StatusFunctions";
 
-const navItems = [{ name: "News", href: "/news", icon: Newspaper }];
+const navItems = [
+  { name: "News", href: "/news", icon: Newspaper },
+  { name: "About", href: "/about", icon: Info },
+];
 
 const authedNavItems = [
   { name: "Profile", href: "/profile", icon: User },

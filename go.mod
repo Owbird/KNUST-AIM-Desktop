@@ -2,7 +2,10 @@ module github.com/Owbird/KNUST-AIM-Desktop
 
 go 1.22.0
 
-require github.com/wailsapp/wails/v2 v2.10.2
+require (
+	github.com/jasonlovesdoggo/gopen v0.0.0-20250130105607-39c98c645030
+	github.com/wailsapp/wails/v2 v2.10.2
+)
 
 require (
 	github.com/anaskhan96/soup v1.2.5 // indirect
