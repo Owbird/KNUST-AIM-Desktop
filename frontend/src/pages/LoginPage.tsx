@@ -37,9 +37,6 @@ export function LoginPage() {
     const { username, password, studentId } = form;
 
     try {
-      console.log(await GetVersion());
-      console.log("Attempting login with:", form);
-
       if (!username || !password || !studentId) {
         setError("Please fill in all required fields to continue.");
         return;
