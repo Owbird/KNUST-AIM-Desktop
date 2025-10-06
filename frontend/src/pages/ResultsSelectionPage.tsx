@@ -18,20 +18,25 @@ import { GetResults, SelectResult } from "@go/results/ResultsFunctions";
 import { models } from "@go/models";
 import { Dialog, DialogContent } from "@src/components/ui/dialog";
 import { ResultsViewerPage } from "./ResultsViewerPage";
+import Loader from "@src/components/Loader";
 
 export function ResultsSelectionPage() {
-  const [availablePeriods, setAvailablePeriods] =
-    useState<models.ResultsSelection | null>(null);
+  const [availablePeriods, setAvailablePeriods] = useState<
+    models.ResultsSelection | null
+  >(null);
 
   const [year, setYear] = useState<string>();
   const [semester, setSemester] = useState<string>();
   const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      SelectResult(token).then(setAvailablePeriods);
+      SelectResult(token)
+        .then(setAvailablePeriods)
+        .finally(() => setLoading(false));
     }
   }, []);
 
@@ -40,6 +45,10 @@ export function ResultsSelectionPage() {
       setIsViewerOpen(true);
     }
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   if (!availablePeriods) return <></>;
 

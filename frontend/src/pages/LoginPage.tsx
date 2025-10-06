@@ -11,7 +11,8 @@ import {
 import { Input } from "@src/components/ui/input";
 import { Label } from "@src/components/ui/label";
 import { AuthenticateUser } from "@go/auth/AuthFunctions";
-import { GetVersion} from "@go/main/App";
+import { GetVersion } from "@go/main/App";
+import Loader from "@src/components/Loader";
 
 export function LoginPage() {
   const [form, setForm] = useState({
@@ -20,6 +21,7 @@ export function LoginPage() {
     studentId: "",
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -28,15 +30,16 @@ export function LoginPage() {
 
   const handleLogin = async () => {
     setError("");
+    setLoading(true);
     const { username, password, studentId } = form;
 
     try {
-      console.log(await GetVersion())
+      console.log(await GetVersion());
       console.log("Attempting login with:", form);
 
       if (username && password && studentId) {
         const res = await AuthenticateUser({ username, password, studentId });
-        localStorage.setItem("token", res)
+        localStorage.setItem("token", res);
 
         window.location.href = "/";
       } else {
@@ -45,8 +48,14 @@ export function LoginPage() {
     } catch (err) {
       setError(err.toString() as string);
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

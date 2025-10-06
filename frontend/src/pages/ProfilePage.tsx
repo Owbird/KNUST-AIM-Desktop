@@ -1,5 +1,6 @@
 import { models } from "@go/models";
 import { GetUserData } from "@go/user/UserFunctions";
+import Loader from "@src/components/Loader";
 import {
   Card,
   CardContent,
@@ -29,14 +30,22 @@ const InfoRow = ({
 
 export function ProfilePage() {
   const [userData, setUserData] = useState<models.UserData | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      GetUserData(token).then(setUserData).catch(console.error);
+      GetUserData(token)
+        .then(setUserData)
+        .catch(console.error)
+        .finally(() => setLoading(false));
     }
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   if (!userData) return <></>;
 

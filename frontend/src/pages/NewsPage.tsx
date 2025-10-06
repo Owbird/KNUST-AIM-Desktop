@@ -16,14 +16,22 @@ import {
 import { useEffect, useState } from "react";
 import { GetNews, GetNewsDetails } from "@go/news/NewsFunctions";
 import { models } from "@go/models";
+import Loader from "@src/components/Loader";
 
 export function NewsPage() {
   const [news, setNews] = useState<models.News[]>([]);
   const [selectedNews, setSelectedNews] = useState<models.News | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    GetNews().then(setNews);
+    GetNews()
+      .then(setNews)
+      .finally(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="container mx-auto py-8">
@@ -77,10 +85,14 @@ function NewsDetailsDialog({
   const [newsDetails, setNewsDetails] = useState<models.NewsDetails | null>(
     null,
   );
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (article) {
-      GetNewsDetails(article.slug).then(setNewsDetails);
+      setLoading(true);
+      GetNewsDetails(article.slug)
+        .then(setNewsDetails)
+        .finally(() => setLoading(false));
     }
   }, [article]);
 
@@ -89,35 +101,37 @@ function NewsDetailsDialog({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px] md:max-w-4xl max-h-[90vh] overflow-y-auto">
-        {newsDetails ? (
-          <>
-            <DialogHeader>
-              <div className="aspect-video w-full bg-muted rounded-t-lg overflow-hidden">
-                <img
-                  src={newsDetails.featured_image}
-                  alt={newsDetails.tile}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <DialogTitle className="text-2xl font-bold">
-                {newsDetails.tile}
-              </DialogTitle>
-              <DialogDescription className="flex items-center space-x-2">
-                <span>{newsDetails.date}</span>
-                <span>&bull;</span>
-                <span>{newsDetails.source}</span>
-                <span>&bull;</span>
-                <span>{newsDetails.read_time} min read</span>
-              </DialogDescription>
-            </DialogHeader>
-            <div className="py-4">
-              {newsDetails.content.map((c, index) => (
-                <p key={index}>{c.value}</p>
-              ))}
-            </div>
-          </>
+        {loading ? (
+          <Loader />
         ) : (
-          <p>Loading...</p>
+          newsDetails && (
+            <>
+              <DialogHeader>
+                <div className="aspect-video w-full bg-muted rounded-t-lg overflow-hidden">
+                  <img
+                    src={newsDetails.featured_image}
+                    alt={newsDetails.tile}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <DialogTitle className="text-2xl font-bold">
+                  {newsDetails.tile}
+                </DialogTitle>
+                <DialogDescription className="flex items-center space-x-2">
+                  <span>{newsDetails.date}</span>
+                  <span>&bull;</span>
+                  <span>{newsDetails.source}</span>
+                  <span>&bull;</span>
+                  <span>{newsDetails.read_time} min read</span>
+                </DialogDescription>
+              </DialogHeader>
+              <div className="py-4">
+                {newsDetails.content.map((c, index) => (
+                  <p key={index}>{c.value}</p>
+                ))}
+              </div>
+            </>
+          )
         )}
       </DialogContent>
     </Dialog>
