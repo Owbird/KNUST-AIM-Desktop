@@ -12,7 +12,6 @@ import {
 import { Input } from "@src/components/ui/input";
 import { Label } from "@src/components/ui/label";
 import { AuthenticateUser } from "@go/auth/AuthFunctions";
-import { GetVersion } from "@go/main/App";
 import Loader from "@src/components/Loader";
 
 export function LoginPage() {

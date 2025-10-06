@@ -25,7 +25,7 @@ export function MainLayout() {
     const formData = localStorage.getItem("token");
 
     setIsAuthenticated(!!formData);
-  }, []);
+  }, [window.location.href]);
 
   useEffect(() => {
     GetStatusBadge().then(setServersStatus).catch(console.error);
@@ -45,7 +45,7 @@ export function MainLayout() {
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link to="/" className="flex items-center gap-2 font-semibold">
               <Home className="h-6 w-6" />
-              <span>KNUST AIM</span>
+              <span>KNUST AIM Desktop</span>
             </Link>
           </div>
           <div className="flex-1">
