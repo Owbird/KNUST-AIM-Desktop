@@ -4,4 +4,4 @@ import {models} from '../models';
 
 export function GetKNUSTStatus():Promise<Array<models.KNUSTServer>>;
 
-export function GetStatusBadge():Promise<Array<number>>;
+export function GetStatusBadge():Promise<string>;

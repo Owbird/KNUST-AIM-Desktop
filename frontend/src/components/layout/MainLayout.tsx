@@ -1,16 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Avatar, AvatarFallback, AvatarImage } from "@src/components/ui/avatar";
 import { Button } from "@src/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@src/components/ui/dropdown-menu";
 import { Home, LogOut, Newspaper, User, BarChart2 } from "lucide-react";
+import { GetStatusBadge } from "@go/status/StatusFunctions";
 
 const navItems = [{ name: "News", href: "/news", icon: Newspaper }];
 
@@ -24,11 +16,16 @@ export function MainLayout() {
   const navigate = useNavigate();
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [serversStatus, setServersStatus] = useState<string | null>(null);
 
   useEffect(() => {
     const formData = localStorage.getItem("token");
 
     setIsAuthenticated(!!formData);
+  }, []);
+
+  useEffect(() => {
+    GetStatusBadge().then(setServersStatus).catch(console.error);
   }, []);
 
   const handleLogout = () => {
@@ -96,29 +93,13 @@ export function MainLayout() {
         </div>
       </div>
       <div className="flex flex-col">
-        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-          <div className="w-full flex-1"></div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <Avatar>
-                  <AvatarImage src="" alt="User Avatar" />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+            <div className="w-full flex-1">
+              {serversStatus && <img src={serversStatus} />}
+            </div>
+          </header>
+
           <Outlet />
         </main>
       </div>
