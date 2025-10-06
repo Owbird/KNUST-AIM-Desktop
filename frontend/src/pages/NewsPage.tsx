@@ -38,7 +38,7 @@ export function NewsPage() {
       <h1 className="text-3xl font-bold mb-8">Latest News</h1>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {news.map((item) => (
-          <Card key={item.slug}>
+          <Card key={item.slug} className="flex flex-col">
             <CardHeader>
               <div className="aspect-video w-full bg-muted rounded-t-lg overflow-hidden">
                 <img
@@ -48,7 +48,7 @@ export function NewsPage() {
                 />
               </div>
             </CardHeader>
-            <CardContent className="grid gap-2">
+            <CardContent className="grid gap-2 flex-grow">
               <CardTitle>{item.title}</CardTitle>
               <p className="text-sm text-muted-foreground">
                 {new Date(item.date).toLocaleDateString()}
