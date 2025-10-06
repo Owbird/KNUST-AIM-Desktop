@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@src/components/ui/button";
 import {
   Card,
@@ -15,6 +16,8 @@ import { GetVersion } from "@go/main/App";
 import Loader from "@src/components/Loader";
 
 export function LoginPage() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -37,17 +40,17 @@ export function LoginPage() {
       console.log(await GetVersion());
       console.log("Attempting login with:", form);
 
-      if (username && password && studentId) {
-        const res = await AuthenticateUser({ username, password, studentId });
-        localStorage.setItem("token", res);
-
-        window.location.href = "/";
-      } else {
-        setError("All fields are required.");
+      if (!username || !password || !studentId) {
+        setError("Please fill in all required fields to continue.");
+        return;
       }
+
+      const res = await AuthenticateUser({ username, password, studentId });
+      localStorage.setItem("token", res);
+      navigate("/")
     } catch (err) {
-      setError(err.toString() as string);
       console.error(err);
+      setError("Login failed. Please check your credentials and try again.");
     } finally {
       setLoading(false);
     }
@@ -58,13 +61,20 @@ export function LoginPage() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Card className="w-full max-w-sm">
-        <CardHeader className="text-center">
-          <div className="mx-auto bg-gray-200 h-16 w-16 rounded-full mb-4"></div>
-          <CardTitle className="text-2xl">KNUST AIM</CardTitle>
-          <CardDescription>Desktop Client Login</CardDescription>
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+      <Card className="w-full max-w-sm shadow-md border border-gray-200 dark:border-gray-700">
+        <CardHeader className="text-center space-y-2">
+          <div className="mx-auto bg-red-500 h-16 w-16 rounded-full mb-3 flex items-center justify-center">
+            <span className="text-white font-bold text-xl">AIM</span>
+          </div>
+          <CardTitle className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+            KNUST AIM Desktop
+          </CardTitle>
+          <CardDescription className="text-gray-500 dark:text-gray-400">
+            Sign in with your student credentials to access your academic dashboard.
+          </CardDescription>
         </CardHeader>
+
         <CardContent>
           <div className="grid gap-4">
             <div className="grid gap-2">
@@ -72,7 +82,7 @@ export function LoginPage() {
               <Input
                 id="username"
                 type="text"
-                placeholder="Your username"
+                placeholder="e.g. jdoe21"
                 value={form.username}
                 onChange={handleChange}
                 required
@@ -83,6 +93,7 @@ export function LoginPage() {
               <Input
                 id="password"
                 type="password"
+                placeholder="Enter your portal password"
                 value={form.password}
                 onChange={handleChange}
                 required
@@ -92,25 +103,32 @@ export function LoginPage() {
               <Label htmlFor="studentId">Student ID</Label>
               <Input
                 id="studentId"
-                type="text"
-                placeholder="Your student ID"
+                type="password"
+                placeholder="e.g. 21234567"
                 value={form.studentId}
                 onChange={handleChange}
                 required
               />
             </div>
+
             {error && (
-              <p className="text-sm text-red-600 text-center">{error}</p>
+              <p className="text-sm text-red-600 text-center bg-red-50 py-1 rounded">
+                {error}
+              </p>
             )}
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col gap-4">
+
+        <CardFooter className="flex flex-col gap-3">
           <Button onClick={handleLogin} className="w-full">
-            Login
+            Sign In
           </Button>
-          <p className="text-xs text-gray-500">Powered by KNUST AIM</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+            This is a community-built desktop client for KNUST AIM.
+          </p>
         </CardFooter>
       </Card>
     </div>
   );
 }
+
