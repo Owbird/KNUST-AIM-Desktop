@@ -2,26 +2,61 @@
 
 ![ss.png](./assets/ss.png)
 
-Welcome to the KNUST AIM Desktop application! This project aims to bring the [KNUST Academic Information Management System (AIM)](https://aim.knust.edu.gh/) mobile experience to desktop.
+Welcome to the KNUST AIM Desktop application! This project aims to bring the [KNUST Academic Information Management System (AIM)](https://apps.knust.edu.gh/knustaim/) mobile experience to desktop.
 
-## Security
+## Features
 
-All data is handled locally and securely by KNUST servers. No third party access to your data.
+- View your academic results
+- Read the latest news from KNUST
+- View your profile information
+- Check the status of the KNUST servers
+
+## Tech Stack
+
+**Frontend:**
+
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+
+**Backend:**
+
+- [Go](https://go.dev/)
+- [Wails](https://wails.io/)
 
 ## Installation
 
-Download the latest release of your OS from [releases](https://github.com/Owbird/KNUST-AIM-Desktop/releases)
+Download the latest release for your OS from the [releases](https://github.com/knust-aim/knust-aim-desktop/releases) page.
+
+## Development
+
+To set up the development environment, you need to have Go and Node.js installed.
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/owbird/knust-aim-desktop.git
+    ```
+2.  Install the frontend dependencies:
+    ```bash
+    cd frontend
+    pnpm install
+    ```
+3.  Run the application:
+    ```bash
+    wails dev
+    ```
 
 ## Contributing
 
 We welcome contributions! To contribute:
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add some feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Open a pull request.
+1.  Fork the repository.
+2.  Create a new branch (`git checkout -b feature-branch`).
+3.  Make your changes.
+4.  Commit your changes (`git commit -m 'Add some feature'`).
+5.  Push to the branch (`git push origin feature-branch`).
+6.  Open a pull request.
 
 ## Disclaimer
 
