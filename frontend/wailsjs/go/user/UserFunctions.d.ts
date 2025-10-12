@@ -3,5 +3,3 @@
 import {models} from '../models';
 
 export function GetUserData(arg1:string):Promise<models.UserData>;
-
-export function GetUserImage(arg1:string):Promise<Array<number>>;

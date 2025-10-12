@@ -11,6 +11,7 @@ require (
 	github.com/anaskhan96/soup v1.2.5 // indirect
 	github.com/go-rod/rod v0.114.7 // indirect
 	github.com/golang-jwt/jwt/v5 v5.2.0 // indirect
+	github.com/mattn/go-sqlite3 v1.14.32 // indirect
 	github.com/ysmood/fetchup v0.2.3 // indirect
 	github.com/ysmood/goob v0.4.0 // indirect
 	github.com/ysmood/got v0.34.1 // indirect

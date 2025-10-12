@@ -5,7 +5,3 @@
 export function GetUserData(arg1) {
   return window['go']['user']['UserFunctions']['GetUserData'](arg1);
 }
-
-export function GetUserImage(arg1) {
-  return window['go']['user']['UserFunctions']['GetUserImage'](arg1);
-}
