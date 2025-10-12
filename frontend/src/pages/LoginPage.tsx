@@ -13,9 +13,11 @@ import { Input } from "@src/components/ui/input";
 import { Label } from "@src/components/ui/label";
 import { AuthenticateUser } from "@go/auth/AuthFunctions";
 import Loader from "@src/components/Loader";
+import { useAuth } from "@src/context/AuthContext";
 
 export function LoginPage() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [form, setForm] = useState({
     username: "",
@@ -38,12 +40,13 @@ export function LoginPage() {
     try {
       if (!username || !password || !studentId) {
         setError("Please fill in all required fields to continue.");
+        setLoading(false);
         return;
       }
 
       const res = await AuthenticateUser({ username, password, studentId });
-      localStorage.setItem("token", res);
-      navigate("/")
+      login(res);
+      navigate("/");
     } catch (err) {
       console.error(err);
       setError("Login failed. Please check your credentials and try again.");

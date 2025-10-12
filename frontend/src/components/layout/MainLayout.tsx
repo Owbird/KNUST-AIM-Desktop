@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@src/components/ui/button";
 import { Home, LogOut, Newspaper, User, BarChart2, Info } from "lucide-react";
 import { GetStatusBadge } from "@go/status/StatusFunctions";
+import { useAuth } from "@src/context/AuthContext";
 
 const navItems = [
   { name: "News", href: "/news", icon: Newspaper },
@@ -17,24 +18,16 @@ const authedNavItems = [
 export function MainLayout() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuth();
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [serversStatus, setServersStatus] = useState<string | null>(null);
-
-  useEffect(() => {
-    const formData = localStorage.getItem("token");
-
-    setIsAuthenticated(!!formData);
-  }, [window.location.href]);
 
   useEffect(() => {
     GetStatusBadge().then(setServersStatus).catch(console.error);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsAuthenticated(false);
-
+    logout();
     navigate("/login");
   };
 
