@@ -5,3 +5,11 @@
 export function AuthenticateUser(arg1) {
   return window['go']['auth']['AuthFunctions']['AuthenticateUser'](arg1);
 }
+
+export function IsAuthed() {
+  return window['go']['auth']['AuthFunctions']['IsAuthed']();
+}
+
+export function RemoveUser() {
+  return window['go']['auth']['AuthFunctions']['RemoveUser']();
+}

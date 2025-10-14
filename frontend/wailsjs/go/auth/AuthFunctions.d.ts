@@ -3,3 +3,7 @@
 import {models} from '../models';
 
 export function AuthenticateUser(arg1:models.UserAuthPayload):Promise<string>;
+
+export function IsAuthed():Promise<boolean>;
+
+export function RemoveUser():Promise<void>;

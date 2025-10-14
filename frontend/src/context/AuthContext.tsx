@@ -1,3 +1,4 @@
+import { IsAuthed, RemoveUser } from "@go/auth/AuthFunctions";
 import {
   createContext,
   useState,
@@ -7,8 +8,8 @@ import {
 } from "react";
 
 interface AuthContextType {
-  isAuthenticated: boolean;
-  login: (token: string) => void;
+  isAuthenticated: boolean ;
+  login: () => void;
   logout: () => void;
   isLoading: boolean;
 }
@@ -20,20 +21,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true);
-    }
+    IsAuthed().then(setIsAuthenticated);
+
     setIsLoading(false);
   }, []);
 
-  const login = (token: string) => {
-    localStorage.setItem("token", token);
+  const login = () => {
     setIsAuthenticated(true);
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      localStorage.removeItem("token");
+      RemoveUser(token);
+    }
+
     setIsAuthenticated(false);
   };
 
