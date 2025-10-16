@@ -14,16 +14,18 @@ import {
   SelectValue,
 } from "@src/components/ui/select";
 import { Label } from "@src/components/ui/label";
-import { GetResults, SelectResult } from "@go/results/ResultsFunctions";
+import { SelectResult } from "@go/results/ResultsFunctions";
 import { models } from "@go/models";
 import { Dialog, DialogContent } from "@src/components/ui/dialog";
 import { ResultsViewerPage } from "./ResultsViewerPage";
 import Loader from "@src/components/Loader";
+import { useAuth } from "@src/context/AuthContext";
+import { withPinVerification } from "@src/components/auth/withPinVerification";
 
-export function ResultsSelectionPage() {
-  const [availablePeriods, setAvailablePeriods] = useState<
-    models.ResultsSelection | null
-  >(null);
+function ResultsSelectionPageInternal() {
+  const { getToken } = useAuth();
+  const [availablePeriods, setAvailablePeriods] =
+    useState<models.ResultsSelection | null>(null);
 
   const [year, setYear] = useState<string>();
   const [semester, setSemester] = useState<string>();
@@ -31,9 +33,10 @@ export function ResultsSelectionPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = getToken();
 
     if (token) {
+      setLoading(true);
       SelectResult(token)
         .then(setAvailablePeriods)
         .finally(() => setLoading(false));
@@ -50,7 +53,15 @@ export function ResultsSelectionPage() {
     return <Loader />;
   }
 
-  if (!availablePeriods) return <></>;
+  if (!availablePeriods) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-muted-foreground">
+          Could not load available results.
+        </p>
+      </div>
+    );
+  }
 
   const { years, sems } = availablePeriods;
 
@@ -111,3 +122,6 @@ export function ResultsSelectionPage() {
   );
 }
 
+export const ResultsSelectionPage = withPinVerification(
+  ResultsSelectionPageInternal,
+);

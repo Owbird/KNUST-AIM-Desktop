@@ -14,6 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "@src/components/ui/table";
+import { useAuth } from "@src/context/AuthContext";
 import { useEffect, useState } from "react";
 
 const InfoPane = ({ label, value }: { label: string; value: string }) => (
@@ -33,8 +34,10 @@ export function ResultsViewerPage({ year, semester }: ResultsViewerPageProps) {
     null,
   );
 
+  const {getToken} = useAuth()
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = getToken()
     if (!token) return;
     GetResults(token, { year, sem: semester }).then(setResults);
   }, [year, semester]);

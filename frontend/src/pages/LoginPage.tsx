@@ -46,7 +46,7 @@ export function LoginPage() {
 
       const res = await AuthenticateUser({ username, password, studentId });
       login(res);
-      navigate("/");
+      navigate("/pin");
     } catch (err) {
       console.error(err);
       setError("Login failed. Please check your credentials and try again.");

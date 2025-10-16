@@ -8,6 +8,7 @@ import { Fragment } from "react";
 import { AboutPage } from "./pages/AboutPage";
 import { useAuth } from "./context/AuthContext";
 import Loader from "./components/Loader";
+import { InitialPinCheckPage } from "./pages/InitialPinCheckPage";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -23,6 +24,7 @@ function App() {
         <Route path="news" element={<NewsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/pin" element={<InitialPinCheckPage />} />
         {isAuthenticated && (
           <Fragment>
             <Route path="profile" element={<ProfilePage />} />

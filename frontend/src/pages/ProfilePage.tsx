@@ -8,6 +8,8 @@ import {
   CardTitle,
 } from "@src/components/ui/card";
 import { useEffect, useState } from "react";
+import { useAuth } from "@src/context/AuthContext";
+import { withPinVerification } from "@src/components/auth/withPinVerification";
 
 const InfoRow = ({
   label,
@@ -22,20 +24,22 @@ const InfoRow = ({
       {Array.isArray(value) ? (
         value.map((v, i) => <p key={i}>{v}</p>)
       ) : (
-        <p>{value}</p>
-      )}
+        <p>{value}</p>)
+      }
     </div>
   </div>
 );
 
-export function ProfilePage() {
+function ProfilePageInternal() {
+  const {getToken} = useAuth();
   const [userData, setUserData] = useState<models.UserData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = getToken()
 
     if (token) {
+      setLoading(true);
       GetUserData(token)
         .then(setUserData)
         .catch(console.error)
@@ -47,7 +51,13 @@ export function ProfilePage() {
     return <Loader />;
   }
 
-  if (!userData) return <></>;
+  if (!userData) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-muted-foreground">Could not load profile data.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto py-8">
@@ -117,4 +127,7 @@ export function ProfilePage() {
     </div>
   );
 }
+
+export const ProfilePage = withPinVerification(ProfilePageInternal);
+
 
