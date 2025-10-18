@@ -34,15 +34,31 @@ export function ResultsViewerPage({ year, semester }: ResultsViewerPageProps) {
     null,
   );
 
-  const {getToken} = useAuth()
+  const { getToken } = useAuth();
 
   useEffect(() => {
-    const token = getToken()
+    const token = getToken();
     if (!token) return;
     GetResults(token, { year, sem: semester }).then(setResults);
   }, [year, semester]);
 
   if (!results) return <></>;
+
+  function scoreToGPA(score: number): number {
+    if (score >= 80) return 4.0; // A
+    if (score >= 75) return 3.7; // A-
+    if (score >= 70) return 3.3; // B+
+    if (score >= 65) return 3.0; // B
+    if (score >= 60) return 2.7; // B-
+    if (score >= 55) return 2.3; // C+
+    if (score >= 50) return 2.0; // C
+    if (score >= 45) return 1.7; // C-
+    if (score >= 40) return 1.3; // D+
+    if (score >= 35) return 1.0; // D
+    return 0.0; // F
+  }
+
+  const gpa = scoreToGPA(parseInt(results.summary.cwa.cumulative));
 
   return (
     <div className="container mx-auto py-8 space-y-8">
@@ -105,25 +121,58 @@ export function ResultsViewerPage({ year, semester }: ResultsViewerPageProps) {
           <CardHeader>
             <CardTitle>Summary</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <InfoPane
-              label="Credits Registered"
-              value={results.summary.credits_registered.toString()}
-            />
-            <InfoPane
-              label="Credits Obtained"
-              value={results.summary.credits_registered.toString()}
-            />
-            <InfoPane
-              label="Credits Calculated"
-              value={results.summary.credits_calculated.toString()}
-            />
-            <InfoPane
-              label="Total Weighted Marks"
-              value={results.summary.credits_obtained.toString()}
-            />
-            <InfoPane label="CWA" value={results.summary.cwa.cumulative} />
-            <InfoPane label="Semester" value={results.summary.cwa.semester} />
+          <CardContent className="p-0">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="font-semibold">Metric</TableHead>
+                  <TableHead className="text-right font-semibold">
+                    Semester
+                  </TableHead>
+                  <TableHead className="text-right font-semibold">
+                    Cumulative
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell className="font-medium">
+                    Credits Calculated
+                  </TableCell>
+                  <TableCell className="text-right">
+                    {results.summary.credits_calculated.semester}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    {results.summary.credits_calculated.cumulative}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium">
+                    Total Weighted Marks
+                  </TableCell>
+                  <TableCell className="text-right">
+                    {results.summary.weighted_marks.semester}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    {results.summary.weighted_marks.cumulative}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium">CWA</TableCell>
+                  <TableCell className="text-right font-bold">
+                    {results.summary.cwa.semester}
+                  </TableCell>
+                  <TableCell className="text-right font-bold">
+                    {results.summary.cwa.cumulative}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium">GPA</TableCell>
+                  <TableCell className="text-right font-bold">-</TableCell>
+                  <TableCell className="text-right font-bold">{gpa}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </CardContent>
         </Card>
         {results.trails.length > 0 && (
