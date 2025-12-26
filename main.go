@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	"os/exec"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -12,24 +11,18 @@ import (
 //go:embed all:frontend/dist
 var assets embed.FS
 
-//go:embed aim-api-server
-var aimServer embed.FS
-
 func main() {
 	// Create an instance of the app structure
 	app := NewApp()
 
-	// Start the API server
-	exec.Command("./aim-api-server").Start()
-
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:     "AIM",
+		Title: "AIM",
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
 		OnStartup: app.startup,
-		Bind: []interface{}{
+		Bind: []any{
 			app,
 			app.UserFunctions,
 			app.ResultFunctions,
