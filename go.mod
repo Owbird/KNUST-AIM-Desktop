@@ -1,22 +1,29 @@
 module github.com/Owbird/KNUST-AIM-Desktop
 
-go 1.22.0
+go 1.24.0
 
 require (
 	github.com/jasonlovesdoggo/gopen v0.0.0-20250130105607-39c98c645030
-	github.com/wailsapp/wails/v2 v2.10.2
+	github.com/wailsapp/wails/v2 v2.11.0
 )
 
 require (
 	github.com/anaskhan96/soup v1.2.5 // indirect
+	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/go-rod/rod v0.114.7 // indirect
 	github.com/golang-jwt/jwt/v5 v5.2.0 // indirect
-	github.com/mattn/go-sqlite3 v1.14.32 // indirect
+	github.com/ncruces/go-strftime v0.1.9 // indirect
+	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	github.com/ysmood/fetchup v0.2.3 // indirect
 	github.com/ysmood/goob v0.4.0 // indirect
 	github.com/ysmood/got v0.34.1 // indirect
 	github.com/ysmood/gson v0.7.3 // indirect
 	github.com/ysmood/leakless v0.8.0 // indirect
+	golang.org/x/exp v0.0.0-20250620022241-b7579e27df2b // indirect
+	modernc.org/libc v1.66.10 // indirect
+	modernc.org/mathutil v1.7.1 // indirect
+	modernc.org/memory v1.11.0 // indirect
+	modernc.org/sqlite v1.41.0 // indirect
 )
 
 replace github.com/Owbird/KNUST-AIM-API => ./KNUST-AIM-API
@@ -44,12 +51,12 @@ require (
 	github.com/tkrajina/go-reflector v0.5.8 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
-	github.com/wailsapp/go-webview2 v1.0.19 // indirect
+	github.com/wailsapp/go-webview2 v1.0.22 // indirect
 	github.com/wailsapp/mimetype v1.4.1 // indirect
-	golang.org/x/crypto v0.33.0 // indirect
-	golang.org/x/net v0.35.0 // indirect
-	golang.org/x/sys v0.30.0 // indirect
-	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/crypto v0.41.0 // indirect
+	golang.org/x/net v0.43.0 // indirect
+	golang.org/x/sys v0.36.0 // indirect
+	golang.org/x/text v0.28.0 // indirect
 )
 
 // replace github.com/wailsapp/wails/v2 v2.8.0 => /home/owbird/go/pkg/mod
